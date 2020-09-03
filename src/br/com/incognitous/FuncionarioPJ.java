@@ -31,11 +31,9 @@ public class FuncionarioPJ extends Funcionario implements Aumentavel {
 	@Override
 	public void pedirFerias() {
 		Period tempoDeEmpresa = Period.between(this.getAdmissao(), LocalDate.now());
-		int mesesDeEmpresa = tempoDeEmpresa.getMonths() + (tempoDeEmpresa.getYears() * 12);
-		int desdeAsUltimasFerias = Period.between(this.getUltimasFerias(), LocalDate.now()).getMonths();
+		long mesesDeEmpresa = tempoDeEmpresa.toTotalMonths();  
+		long desdeAsUltimasFerias = (int) Period.between(this.getUltimasFerias(), LocalDate.now()).toTotalMonths();
 		
-		System.out.println(tempoDeEmpresa);
-		System.out.println(mesesDeEmpresa);
 		
 		if (mesesDeEmpresa >= 11 && desdeAsUltimasFerias >= 4) {
 			this.setDeFerias(true);
