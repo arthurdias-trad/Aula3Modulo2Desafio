@@ -27,30 +27,17 @@ public class FuncionarioPF extends Funcionario implements Aumentavel {
 	}
 
 	@Override
-	public void pedirFerias() {
-		long tempoDeEmpresa = Period.between(this.getAdmissao(), LocalDate.now()).toTotalMonths();
-		long desdeAsUltimasFerias = Period.between(this.getUltimasFerias(), LocalDate.now()).toTotalMonths();
+	public void pedirFerias(LocalDate dataInicio) {
+		long tempoDeEmpresa = Period.between(this.getAdmissao(), dataInicio).toTotalMonths();
+		long desdeAsUltimasFerias = Period.between(this.getUltimasFerias(), dataInicio).toTotalMonths();
 		
 		if (tempoDeEmpresa >= 11 && desdeAsUltimasFerias >= 4) {
 			this.setDeFerias(true);
-			this.setUltimasFerias(LocalDate.now());
+			this.setUltimasFerias(dataInicio);
 		} else {
 			System.out.println("O funcionário não cumpre os requisitos para férias.");
 		}
 
-	}
-
-	public void reajustar(Funcionario funcionario, float valor) {
-//		if (!this.isGerente()) {
-//			System.out.println("Funcionário sem autorização para reajustes");
-//		} else if (valor <= 0){
-//			System.out.println("Gerentes só podem aumentar o salário, o valor do reajuste deve ser positivo");
-//		} else if (((FuncionarioPF) funcionario).isGerente()) {
-//			System.out.println("Gerentes não podem reajustar outros gerentes");
-//		} else {
-//			funcionario.setSalarioBase(funcionario.getSalarioBase() + valor);
-//			System.out.println("Salário reajustado");
-//		}
 	}
 
 	@Override
@@ -65,6 +52,10 @@ public class FuncionarioPF extends Funcionario implements Aumentavel {
 	@Override
 	public void pedirDemissao() {
 		this.setDemissao(LocalDate.now());
+	}
+	
+	public void pedirDemissao(LocalDate dataInicio) {
+		this.setDemissao(dataInicio);
 	}
 
 	@Override

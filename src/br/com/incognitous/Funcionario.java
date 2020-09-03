@@ -108,7 +108,7 @@ public abstract class Funcionario {
 
 	public abstract void verContracheque();
 	
-	public abstract void pedirFerias();
+	public abstract void pedirFerias(LocalDate dataInicio);
 	
 	public abstract void trabalhar();
 	

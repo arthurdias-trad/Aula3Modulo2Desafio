@@ -29,15 +29,14 @@ public class FuncionarioPJ extends Funcionario implements Aumentavel {
 	}
 
 	@Override
-	public void pedirFerias() {
-		Period tempoDeEmpresa = Period.between(this.getAdmissao(), LocalDate.now());
-		long mesesDeEmpresa = tempoDeEmpresa.toTotalMonths();  
-		long desdeAsUltimasFerias = (int) Period.between(this.getUltimasFerias(), LocalDate.now()).toTotalMonths();
+	public void pedirFerias(LocalDate dataInicio) {
+		long mesesDeEmpresa = Period.between(this.getAdmissao(), dataInicio).toTotalMonths();  
+		long desdeAsUltimasFerias = (int) Period.between(this.getUltimasFerias(), dataInicio).toTotalMonths();
 		
 		
 		if (mesesDeEmpresa >= 11 && desdeAsUltimasFerias >= 4) {
 			this.setDeFerias(true);
-			this.setUltimasFerias(LocalDate.now());
+			this.setUltimasFerias(dataInicio);
 		} else {
 			System.out.println("O funcionário não cumpre os requisitos para férias.");
 		}
@@ -57,6 +56,10 @@ public class FuncionarioPJ extends Funcionario implements Aumentavel {
 	@Override
 	public void pedirDemissao() {
 		this.setDemissao(LocalDate.now());
+	}
+	
+	public void pedirDemissão(LocalDate dataInicio) {
+		this.setDemissao(dataInicio);
 	}
 
 
